@@ -91,7 +91,7 @@ function BoosterDetail() {
               </div>
             )}
 
-            <Button size="lg" className="w-full" disabled={busy || (user && !canBuy)} onClick={purchase}>
+            <Button size="lg" className="w-full" disabled={busy || (!!user && !canBuy)} onClick={purchase}>
               <ShoppingCart className="size-4 mr-2" />
               {!user ? "Entrar para comprar" : !canBuy ? "Moedas insuficientes" : busy ? "Comprando..." : `Comprar ${qty}× ${booster.kind === "box" ? "caixa" : "pacote"}`}
             </Button>
