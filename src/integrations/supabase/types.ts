@@ -14,7 +14,148 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      boosters: {
+        Row: {
+          id: string
+          image_key: string
+          kind: string
+          name: string
+          pack_count: number
+          price: number
+          theme: string
+        }
+        Insert: {
+          id?: string
+          image_key: string
+          kind: string
+          name: string
+          pack_count?: number
+          price: number
+          theme: string
+        }
+        Update: {
+          id?: string
+          image_key?: string
+          kind?: string
+          name?: string
+          pack_count?: number
+          price?: number
+          theme?: string
+        }
+        Relationships: []
+      }
+      cards: {
+        Row: {
+          art_color: string
+          description: string | null
+          element: string
+          id: string
+          name: string
+          power: number
+          rarity: string
+        }
+        Insert: {
+          art_color?: string
+          description?: string | null
+          element: string
+          id?: string
+          name: string
+          power?: number
+          rarity: string
+        }
+        Update: {
+          art_color?: string
+          description?: string | null
+          element?: string
+          id?: string
+          name?: string
+          power?: number
+          rarity?: string
+        }
+        Relationships: []
+      }
+      inventory_items: {
+        Row: {
+          acquired_at: string
+          booster_id: string
+          id: string
+          opened: boolean
+          user_id: string
+        }
+        Insert: {
+          acquired_at?: string
+          booster_id: string
+          id?: string
+          opened?: boolean
+          user_id: string
+        }
+        Update: {
+          acquired_at?: string
+          booster_id?: string
+          id?: string
+          opened?: boolean
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inventory_items_booster_id_fkey"
+            columns: ["booster_id"]
+            isOneToOne: false
+            referencedRelation: "boosters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          coins: number
+          created_at: string
+          id: string
+          username: string | null
+        }
+        Insert: {
+          coins?: number
+          created_at?: string
+          id: string
+          username?: string | null
+        }
+        Update: {
+          coins?: number
+          created_at?: string
+          id?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
+      user_cards: {
+        Row: {
+          card_id: string
+          id: string
+          obtained_at: string
+          user_id: string
+        }
+        Insert: {
+          card_id: string
+          id?: string
+          obtained_at?: string
+          user_id: string
+        }
+        Update: {
+          card_id?: string
+          id?: string
+          obtained_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_cards_card_id_fkey"
+            columns: ["card_id"]
+            isOneToOne: false
+            referencedRelation: "cards"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
