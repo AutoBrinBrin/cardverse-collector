@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { boosterImage } from "@/lib/booster-images";
@@ -11,10 +11,15 @@ export const Route = createFileRoute("/shop")({ component: Shop });
 type Booster = { id: string; name: string; kind: "pack" | "box"; price: number; pack_count: number; theme: string; image_key: string };
 
 function Shop() {
+  const location = useLocation();
   const [boosters, setBoosters] = useState<Booster[]>([]);
   useEffect(() => {
     supabase.from("boosters").select("*").order("price").then(({ data }) => setBoosters((data ?? []) as Booster[]));
   }, []);
+
+  if (location.pathname !== "/shop") {
+    return <Outlet />;
+  }
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10">
