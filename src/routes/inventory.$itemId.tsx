@@ -12,7 +12,7 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/inventory/$itemId")({ component: OpenPack });
 
-type Booster = { id: string; name: string; kind: "pack" | "box"; pack_count: number; image_key: string };
+type Booster = { id: string; name: string; kind: "pack" | "box"; pack_count: number; image_key: string; model_url: string | null };
 type CardRow = { id: string; name: string; rarity: string; element: string; power: number; art_color: string };
 
 function pickByRarity(cards: CardRow[]): CardRow {
@@ -74,7 +74,7 @@ function OpenPack() {
 
       {!opened ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <BoosterViewer3D image={boosterImage(booster.image_key)} isBox={booster.kind === "box"} />
+          <BoosterViewer3D image={boosterImage(booster.image_key)} isBox={booster.kind === "box"} modelUrl={booster.model_url} />
           <Card className="bg-black/40 border-white/10">
             <CardContent className="p-6 space-y-4">
               <h1 className="text-3xl font-bold">{booster.name}</h1>

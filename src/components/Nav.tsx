@@ -1,12 +1,12 @@
 import { Link, useRouter } from "@tanstack/react-router";
 import { useAuth } from "@/lib/auth";
-import { Coins, Sparkles, Package, BookOpen, ShoppingBag, LogOut, LogIn, Menu } from "lucide-react";
+import { Coins, Sparkles, Package, BookOpen, ShoppingBag, LogOut, LogIn, Menu, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { useState } from "react";
 
 export function Nav() {
-  const { user, profile, signOut } = useAuth();
+  const { user, profile, isAdmin, signOut } = useAuth();
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
@@ -21,6 +21,11 @@ export function Nav() {
       <Link to="/album" onClick={() => setOpen(false)} className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
         <BookOpen className="size-4" /> Álbum
       </Link>
+      {isAdmin && (
+        <Link to="/admin" onClick={() => setOpen(false)} className="flex items-center gap-2 text-sm font-medium text-violet-300 hover:text-violet-100 transition-colors">
+          <Shield className="size-4" /> Admin
+        </Link>
+      )}
     </>
   );
 

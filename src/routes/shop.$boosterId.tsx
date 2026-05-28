@@ -12,7 +12,7 @@ import { Coins, Minus, Plus, ShoppingCart, ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/shop/$boosterId")({ component: BoosterDetail });
 
-type Booster = { id: string; name: string; kind: "pack" | "box"; price: number; pack_count: number; theme: string; image_key: string };
+type Booster = { id: string; name: string; kind: "pack" | "box"; price: number; pack_count: number; theme: string; image_key: string; model_url: string | null };
 
 function BoosterDetail() {
   const { boosterId } = Route.useParams();
@@ -52,7 +52,7 @@ function BoosterDetail() {
       <Link to="/shop" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4"><ArrowLeft className="size-4" /> Voltar à loja</Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <BoosterViewer3D image={boosterImage(booster.image_key)} isBox={booster.kind === "box"} />
+        <BoosterViewer3D image={boosterImage(booster.image_key)} isBox={booster.kind === "box"} modelUrl={booster.model_url} />
 
         <Card className="bg-black/40 border-white/10">
           <CardContent className="p-6 space-y-5">
